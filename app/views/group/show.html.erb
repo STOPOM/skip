@@ -34,6 +34,24 @@
 <% end -%>
 
 <% content_for :contents_left do -%>
+  <% unless @recent_announce.blank? %>
+    <%= render :partial => "entries/topix_entries",
+      :locals => {
+        :title => _('Notices for you'),
+        :entries => @recent_announce
+      }
+    %>
+  <% else -%>
+    <%= render :partial => "entries/topix_entries",
+      :locals => {
+        :title => _('Notices for you')
+      }
+    %>
+    <center>
+     <%= _('No messages for you') %>
+    </center>
+  <% end %>
+
   <%= render :partial => 'action_box' %>
 
   <div class="box_space">
@@ -73,14 +91,13 @@
     </div>
   </div><!-- group_info_space -->
 
-  <% unless @recent_messages.blank? %>
+  <% unless @recent_questions.blank? %>
     <%= render :partial => "entries/topix_entries",
       :locals => {
-        :title => _('Recent Entries'),
-        :entries => @recent_messages
+        :title => _('Recent Questions'),
+        :entries => @recent_questions
       }
     %>
   <% end %>
-
   <%= render(:partial => 'collaboration_app/feeds') %>
 <% end -%>
