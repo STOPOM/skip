@@ -31,6 +31,14 @@ class GroupController < ApplicationController
     @owners = User.owned(@group).order_joined.limit(20)
     @except_owners = User.joined_except_owned(@group).order_joined.limit(20)
     find_params = BoardEntry.make_conditions(current_user.belong_symbols, :symbol => @group.symbol)
+    @recent_announce = BoardEntry.scoped(
+        :conditions => find_params[:conditions],
+        :include => find_params[:include] | [ :user, :state ]
+      ).order_sort_type("date").aim_type("notice").visible(:limit => 10)
+    @recent_questions = BoardEntry.scoped(
+        :conditions => find_params[:conditions],
+        :include => find_params[:include] | [ :user, :state ]
+      ).order_sort_type("date").aim_type("question").visible(:limit => 10)
     @recent_messages = BoardEntry.scoped(
         :conditions => find_params[:conditions],
         :include => find_params[:include] | [ :user, :state ]
