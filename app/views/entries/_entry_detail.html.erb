@@ -304,6 +304,8 @@
     <%= label "board_entry_comment", "contents", _('Write a comment') %>
     <%= text_area 'board_entry_comment', 'contents', :cols => 40, :rows => 5 %><br/>
     <%= submit_tag _("Post") %>
+     <span class="share_file_uploader trigger pointer link"><span class="ss_sprite ss_attach">&nbsp;</span><%= _('Insert file in text body') %></span>
+     <div id="share_file_uploader"></div>
   <% end -%>
 </div>
 
@@ -728,6 +730,6 @@
       var authenticity_token = function(){
           return $j('input[name="authenticity_token"]').eq(0).val();
       };
-
       $j("textarea").jGrow({ rows: 25 });
+
 <% end -%>
